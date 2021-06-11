@@ -7,7 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class AutoScrollRecyclerView : RecyclerView {
+class AutoLoopRecyclerView : RecyclerView {
     val loopHandler = Handler()
 
     // flag to check if user is scrolling or not
@@ -31,7 +31,7 @@ class AutoScrollRecyclerView : RecyclerView {
                         // scrolling to next banner
                         smoothScrollToPosition(pos + 1)
                     }
-                    loopHandler.postDelayed(this, BANNER_AUTO_SCROLL_TIMER)
+                    loopHandler.postDelayed(this, ITEM_AUTO_SCROLL_TIMER)
                 }
             }
         }
@@ -79,13 +79,14 @@ class AutoScrollRecyclerView : RecyclerView {
         // start auto scroll only if it is off
         if (!isAutoScrollOn) {
             isAutoScrollOn = true
-            loopHandler.postDelayed(runnable, BANNER_AUTO_SCROLL_TIMER)
+            loopHandler.postDelayed(runnable, ITEM_AUTO_SCROLL_TIMER)
         }
     }
 
     companion object {
         private const val TAG = "AutoScrollRecyclerView"
-        private const val BANNER_AUTO_SCROLL_TIMER = 5000L
+        //Timer delay between items scroll in recycler view
+        private const val ITEM_AUTO_SCROLL_TIMER = 5000L
     }
 
     override fun onScrollStateChanged(newState: Int) {
